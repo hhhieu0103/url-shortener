@@ -1,0 +1,21 @@
+### POST request to create a short url
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+  "url": "https://www.tutorialspoint.com/postgresql/postgresql_alter_database.htm"
+}
+
+### POST request to create a short url from invalid url
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+  "url": "invalidurl.com"
+}
+
+### GET request to get the original url from a short url
+GET http://localhost:3000/DLddEQ1K
+
+### GET request to get the original url from random value
+GET http://localhost:3000/12312312

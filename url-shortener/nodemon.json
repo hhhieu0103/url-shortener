@@ -1,0 +1,7 @@
+{
+  "watch": ["."],
+  "ext": "js,json",
+  "ignore": ["node_modules"],
+  "exec": "node --inspect=0.0.0.0:9229 bin/www",
+  "legacyWatch": true
+}

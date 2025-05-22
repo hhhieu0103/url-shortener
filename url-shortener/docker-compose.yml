@@ -1,0 +1,33 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3001:3000"
+      - "9230:9229"
+    depends_on:
+      - db
+    environment:
+      - PGUSER=${PGUSER}
+      - PGPASSWORD=${PGPASSWORD}
+      - PGDATABASE=${PGDATABASE}
+      - PGHOST=db
+      - PGPORT=${PGPORT}
+      - DOMAIN=${DOMAIN}
+      - NODE_ENV=docker
+    restart: unless-stopped
+
+  db:
+    image: postgres:17.5
+    environment:
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${PGDATABASE}
+      - POSTGRES_HOST=${PGHOST}
+      - POSTGRES_PORT=${PGPORT}
+    ports:
+      - "5433:${PGPORT}"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
