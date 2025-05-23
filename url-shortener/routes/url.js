@@ -53,7 +53,7 @@ router.get('/:shortCode', async function(req, res, next) {
 
     next()
 
-}, async function(req, res, next) {
+}, async function(req, res) {
     const shortCode = req.params.shortCode
     const url = await urlService.getOriginalURL(shortCode)
     if (!url) res.status(404).send('Not found');
