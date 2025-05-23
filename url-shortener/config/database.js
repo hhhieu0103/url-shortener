@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Pool } = require('pg');
 
 const pool = new Pool();
-const execute_txn = async (callbackFn, ...parameters) => {
+const executeTransaction = async (callbackFn, ...parameters) => {
     const client = await pool.connect()
     try {
         await client.query('BEGIN')
@@ -15,4 +15,4 @@ const execute_txn = async (callbackFn, ...parameters) => {
         client.release();
     }
 }
-module.exports = {pool, execute_txn};
+module.exports = {pool, executeTransaction};

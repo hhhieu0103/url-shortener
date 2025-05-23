@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### GET request to get the original url from a short url
-GET http://localhost:3000/DLddEQ1K
+GET http://localhost:3000/jeM1POKa
 
 ### GET request to get the original url from random value
 GET http://localhost:3000/12312312
