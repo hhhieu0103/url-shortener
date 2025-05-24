@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { UrlService } = require('../services/urlService');
-const urlService = new UrlService()
 
 require('dotenv').config();
 
@@ -28,6 +27,7 @@ router.post('/', function(req, res, next) {
     let originalURL = req.body.url;
 
     try {
+        const urlService = new UrlService()
         let shortCode = await urlService.createShortURL(originalURL);
         const shortURL = process.env.DOMAIN + shortCode;
         if (shortURL === -1) return res.status(400).send("Please try again later");
@@ -55,6 +55,7 @@ router.get('/:shortCode', async function(req, res, next) {
 
 }, async function(req, res) {
     const shortCode = req.params.shortCode
+    const urlService = new UrlService()
     const url = await urlService.getOriginalURL(shortCode)
     if (!url) res.status(404).send('Not found');
     // res.redirect(url)
