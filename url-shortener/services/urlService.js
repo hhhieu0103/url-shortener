@@ -1,8 +1,16 @@
 const { nanoid } = require('nanoid');
-const cache = require('../config/cache');
+const getClient = require('../config/cache');
 const { pool, executeTransaction } = require('../config/database');
 
 class UrlService {
+    cache;
+
+    constructor() {
+        getClient().then((client) => {
+            this.cache = client;
+        })
+    }
+
     async getNumActive(shortCode) {
         const result = await pool.query(`
             SELECT COUNT(s.id)
